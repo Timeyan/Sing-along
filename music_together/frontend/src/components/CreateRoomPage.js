@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { createRoot } from "react-dom/client";
 import Button from "@mui/material/Button";
 import Grid2 from "@mui/material/Grid2";
 import Typography from "@mui/material/Typography";
@@ -23,7 +24,7 @@ export default class CreateRoomPage extends Component {
             guestCanPause: true,
             votesToSkip: this.defaultVotes,
         };
-
+        
         this.handleRoomButtonPressed = this.handleRoomButtonPressed.bind(this);
         this.handleGuestCanPauseChange = this.handleGuestCanPauseChange.bind(this);
         this.handleVotesChange = this.handleVotesChange.bind(this)

@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import HomePage from "./HomePage";
 
 
-function App(props) {
+function App() {
     return (
         <div>
             <HomePage />
