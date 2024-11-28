@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { TextField, Button, Grid2, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import Grid2 from "@mui/material/Grid2";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 import { Link, useNavigate } from "react-router-dom";
-//import { response } from "express";
 
 const RoomJoinPage = () => {
     const [roomCode, setRoomCode] = useState("");
