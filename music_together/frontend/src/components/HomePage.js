@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import RoomJoinPage from './RoomJoinPage';
 import CreateRoomPage from './CreateRoomPage';
 import Room from "./Room";
@@ -8,19 +8,24 @@ import {
     Routes,
     Route,
     Link, 
-    Redirect, 
+    Navigate, 
     data
 } from "react-router-dom";
 
 const HomePage = () => {
 
-    const ComponentDidMount = async () => {
-        fetch('/api/user-in-room').then(
-            (response) => response.json()
-        ).then(
-            (data) => {}
-        );
-    }
+    const [roomCode, setRoomCode] = useState(null);
+
+    useEffect(() => {
+        const fetchUserInRoom = async () => {
+            const response = await fetch('/api/user-in-room');
+            const data = await response.json();
+            setRoomCode(data.code);
+        };
+        fetchUserInRoom();
+
+    }, []);
+
 
     const RenderHomePage = () => {
         return (
@@ -55,7 +60,13 @@ const HomePage = () => {
             <Routes>
                 <Route
                     exact path='/'
-                    element={<RenderHomePage />}
+                    element={
+                        roomCode ? (
+                          <Navigate to={`/room/${roomCode}`} />
+                        ) : (
+                          <RenderHomePage />
+                        )
+                    }
                 />
                 <Route 
                     exact path='/join' 
