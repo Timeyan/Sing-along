@@ -20,11 +20,16 @@ const HomePage = () => {
         const fetchUserInRoom = async () => {
             const response = await fetch('/api/user-in-room');
             const data = await response.json();
+            console.log(`from useEffect HomePage:`, data);
             setRoomCode(data.code);
         };
         fetchUserInRoom();
 
     }, []);
+
+    const clearRoomCode = () => {
+        setRoomCode(null);
+    }
 
 
     const RenderHomePage = () => {
@@ -78,7 +83,7 @@ const HomePage = () => {
                 />
                 <Route 
                     exact path='/room/:roomCode' 
-                    element={<Room />} 
+                    element={<Room leaveRoomCallback={clearRoomCode} />} 
                 />
             </Routes>
         </Router>
@@ -86,29 +91,3 @@ const HomePage = () => {
 }
 
 export default HomePage;
-
-// export default class HomePge extends Component {
-//     constructor(props) {
-//         super(props);
-//     }
-
-//     render() {
-//         return (
-//             <Router>
-//                 <Routes>
-//                     <Route exact path='/' element={
-//                         <div>
-//                             <p>Я ебу собаку</p>
-//                             <Button variant="contained" color="primary" to="/join" component={Link}>
-//                                 Join Room
-//                             </Button>
-//                         </div>
-//                     } />
-//                     <Route exact path='/join' element={<RoomJoinPage />} />
-//                     <Route exact path='/create' element={<CreateRoomPage />} />
-//                     <Route exact path='/room/:roomCode' element={<Room />} />
-//                 </Routes>
-//             </Router>
-//         );
-//     }
-// }

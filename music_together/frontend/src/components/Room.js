@@ -15,19 +15,27 @@ const Room = ({ leaveRoomCallback }) => {
     const getRoomDetails = async () => {
         const response = await fetch(`/api/get-room?code=${roomCode}`);
         if (!response.ok) {
-            leaveRoomCallback();
+            leaveRoomCallback;
             navigate("/");
             return;
         }
+        console.log(response);
         const data = await response.json();
         setGuestCanPause(data.guest_can_pause);
         setVotesToSkip(data.votes_to_skip);
         setIsHost(data.is_host);
-        console.log("yeah");
     }
 
     const leaveButtonPressed = () => {
-        console.log("click");
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+        };
+        console.log(`from useEffect HomePage:`, data);
+        fetch("/api/leave-room", requestOptions).then((_response) => {
+            leaveRoomCallback;
+            navigate("/");
+        });
     }
 
     return (
