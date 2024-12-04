@@ -20,7 +20,6 @@ const HomePage = () => {
         const fetchUserInRoom = async () => {
             const response = await fetch('/api/user-in-room');
             const data = await response.json();
-            console.log(`from useEffect HomePage:`, data);
             setRoomCode(data.code);
         };
         fetchUserInRoom();
